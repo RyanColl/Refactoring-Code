@@ -9,27 +9,24 @@ export class LinkedListGroup implements ISortable {
       const node = new Node(data);
       if (!this.head) {
         this.head = node;
-        console.log(this.head.data)
         return;
       }
+  
       let tail = this.head;
       while (tail.next) {
         tail = tail.next;
       }
-      console.log(this.head.data)
       tail.next = node;
-      return;
     }
   
     // Should return number of Nodes in List
     get length(): number {
         let search = this.head;
-        let counter = 0;
+        let counter = 1;
         while(search.next) {
             search = search.next
             counter++
         }
-        console.log(`The Linked List Contains ${counter} Nodes`)
         return counter;
     }
   
@@ -54,22 +51,9 @@ export class LinkedListGroup implements ISortable {
         if (!this.head) {
             throw new Error("Error: Index out of bounds");
         }
-        let node: Node | null = this.head;
-        let counter = 0;
-        let posL = 0;
-        let posR = 0;
-        while(node) {
-            if (counter === leftPos) {
-                posL = node.data
-            }
-            if(counter === rightPos) {
-                posR = node.data
-            }
-            counter++;
-            node = node.next;
-        }
-        if(posL > posR) return true;
-        else return false;
+        let leftNode = this.at(leftPos)
+        let rightNode = this.at(rightPos)
+        if (leftNode.data > rightNode.data) return true; else return false;
     }
   
     swap(leftPos: number, rightPos: number): void {
@@ -82,45 +66,6 @@ export class LinkedListGroup implements ISortable {
         leftNode.data = rightNode.data;
         rightNode.data = leftTemp;
         return;
-
-        // ***
-        // unique method, but I do not need to make new nodes. The junior developer has quietly added an "at" function, how convenient
-        // ***
-        // let node: Node | null = this.head;
-        // let counter = 0;
-        // let posL = 0;
-        // let uniqueLeft = 0;
-        // let posR = 0;
-        // let uniqueRight = 0;
-        // while(node) {
-        //     if (counter === leftPos) {
-        //         posL = node.data
-        //         uniqueLeft = counter;
-        //     }
-        //     if(counter === rightPos) {
-        //         posR = node.data
-        //         uniqueRight = counter;
-        //     }
-        //     counter++;
-        //     node = node.next;
-        // }
-        // if(posL > posR) {
-        //     node = this.head
-        //     counter = 0;
-        //     const newnode1 = new Node(posR)
-        //     const newnode2 = new Node(posL)
-        //     newnode1.next = newnode2;
-        //     while(node) {
-        //         if (counter == (uniqueLeft - 1)) {
-        //             node.next = newnode1
-        //         }
-        //         if (counter == (uniqueRight + 1)) {
-        //             newnode2.next = node;
-        //         }
-        //         counter++;
-        //         node = node.next;
-        //     }
-        // }
     }
   
     print(): void {

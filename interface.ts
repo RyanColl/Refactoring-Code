@@ -1,8 +1,5 @@
-import { NumberGroup } from './numbergroup'
-import { CharacterGroup } from './charactergroup'
 import { LinkedListGroup } from './linkedlistgroup'
-import { Node } from './node'
-
+import { SortUtil } from './sortutil'
 
 export interface ISortable {
     length: number;
@@ -10,13 +7,10 @@ export interface ISortable {
     swap(leftPos: number, rightPos:number): void;
 }
 
-const numberGroup = new NumberGroup([15, 23, -15, 28, 159, -160, 0])
-const characterGroup = new CharacterGroup("string-string-yellow")
-const linkedListGroup = new LinkedListGroup()
-let node = new Node(6)
-let i = 0;
+export const linkedListGroup = new LinkedListGroup()
+linkedListGroup.add(0); linkedListGroup.add(1);
+linkedListGroup.add(-10); linkedListGroup.add(-67);
 
-
-
-linkedListGroup.add(0)
-linkedListGroup.add(1)
+export const sorter1 = new SortUtil([15, 23, -15, 28, 159, -160, 0]);
+export const sorter2 = new SortUtil("string-string-yellow");
+export const sorter3 = new SortUtil(linkedListGroup);
